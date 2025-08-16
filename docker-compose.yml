@@ -11,23 +11,23 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.8.1
-    container_name: elasticsearch_local
+    image: docker.elastic.co/elasticsearch/elasticsearch:9.1.2
+    container_name: es-local-dev
     volumes:
       - dev-elasticsearch:/usr/share/elasticsearch/data
     ports:
       - 127.0.0.1:9200:9200
     environment:
       - discovery.type=single-node
-      - ELASTIC_PASSWORD=changeme
+      - ELASTIC_PASSWORD=qmaJeULu
       - xpack.security.enabled=false
       - xpack.security.http.ssl.enabled=false
       - xpack.license.self_generated.type=trial
       - xpack.ml.use_auto_machine_memory_percent=true
-      - ES_JAVA_OPTS=-Xms512m -Xmx512m
-      - cluster.routing.allocation.disk.watermark.low=85%
-      - cluster.routing.allocation.disk.watermark.high=90%
-      - cluster.routing.allocation.disk.watermark.flood_stage=95%
+      - ES_JAVA_OPTS=-Xms128m -Xmx2g
+      - cluster.routing.allocation.disk.watermark.low=1gb
+      - cluster.routing.allocation.disk.watermark.high=1gb
+      - cluster.routing.allocation.disk.watermark.flood_stage=1gb
     ulimits:
       memlock:
         soft: -1
@@ -36,7 +36,7 @@ services:
       test:
         [
           "CMD-SHELL",
-          "curl --output /dev/null --silent --head --fail -u elastic:changeme http://elasticsearch:9200",
+          "curl --output /dev/null --silent --head --fail -u elastic:qmaJeULu http://elasticsearch:9200",
         ]
       interval: 10s
       timeout: 10s
