@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   end
   namespace :api do
     namespace :v1 do
-      resources :companies, only: [] do
+        resources :companies, only: [], param: :name do
         resources :jobs, only: [ :index ]
       end
     end

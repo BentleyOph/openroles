@@ -1,6 +1,7 @@
 class Api::V1::JobsController < ApplicationController
   def index
-    company = Company.find(params[:company_id])
+  name_param = params[:company_name] || params[:name]
+  company = Company.where('LOWER(name) = ?', name_param.to_s.downcase).first!
     jobs = company.jobs
     render json: jobs, status: :ok
   rescue ActiveRecord::RecordNotFound
