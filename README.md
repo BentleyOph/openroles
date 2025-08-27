@@ -79,8 +79,14 @@ The entire development environment is managed by Docker Compose, making setup qu
     The `db:seed` command also automatically re-indexes the new `Job` records in Elasticsearch.
 
 4.  **Access the Application**
-    You can now access the application and its development tools at the following URLs:
-    *   **Main Application:** [http://localhost:3000](http://localhost:3000)
+   ```bash
+bin/rails s
+good_job start
+```
+
+You can now access the application and its development tools at the following URLs:
+    
+*   **Main Application:** [http://localhost:3000](http://localhost:3000)
     *   **GoodJob Dashboard:** [http://localhost:3000/good_job](http://localhost:3000/good_job)
     *   **Mail Previews (LetterOpener):** [http://localhost:3000/letter_opener](http://localhost:3000/letter_opener)
 
