@@ -97,6 +97,19 @@ To stop the services, run `docker-compose down`.
 7.  It finds the intersection between *newly created jobs* and the *search results for the alert*.
 8.  If any matching jobs are found, it sends a single email to the user containing all the new job listings.
 
+## How to test email 
+Make sure the server is running
+
+1. Create a new alert using the search form.
+2. Go to rails console and create a job manually for a specific company e.g 
+```
+startup_company = Company.find_by(name: "Stealth Startup")
+Job.create!(title:", description: "A new role for python devs.", company: startup_company, remote: true)
+Job.reindex
+```
+3. Trigger the `AlertMatcherJob` manually using the command `bin/rails alerts:check`.
+4. Check the email inbox(localhost:3000/letter_opener) to see the emails 
+
 ## Scheduling Alerts in Production
 
 In a production environment, you need to run the `AlertMatcherJob` on a regular basis (e.g., every hour). With GoodJob, this is straightforward using its built-in cron-style scheduler.
