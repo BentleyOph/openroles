@@ -7,8 +7,23 @@
     <%= text_field_tag :query, params[:query], placeholder: "Search for jobs...", style: "flex-grow: 1; padding: 0.75rem; font-size: 1rem;" %>
     <%= submit_tag "Search", style: "padding: 0.75rem 1.5rem; font-size: 1rem; cursor: pointer;" %>
   <% end %>
+  <% if params[:query].present? %>
+    <div style="background-color: #f8f9fa; padding: 1rem; margin-top: 2rem; border-radius: 5px;">
+      <h3>Create an Alert</h3>
+      <p>Get an email when new jobs are posted for: <strong>"<%= params[:query] %>"</strong></p>
+
+      <%= form_with(model: Alert.new, style: "display: flex; gap: 0.5rem;") do |form| %>
+        <%# Hidden field to pass along the current search query %>
+        <%= form.hidden_field :query, value: params[:query] %>
+
+        <%= form.email_field :email, placeholder: "Enter your email...", required: true, style: "flex-grow: 1; padding: 0.75rem;" %>
+        <%= form.submit "Notify Me" %>
+      <% end %>
+    </div>
+  <% end %>
 
   <hr style="margin: 2rem 0;">
+  
 
   <%# The Results Section %>
   <div id="results">
