@@ -63,7 +63,7 @@ The entire development environment is managed by Docker Compose, making setup qu
     This command will build the Docker images for the web service, and pull the required images for PostgreSQL and Elasticsearch. It will then start all services in the background.
 
     ```bash
-    docker-compose up --build -d
+    docker-compose up -d
     ```
 
 3.  **Set Up the Database**
