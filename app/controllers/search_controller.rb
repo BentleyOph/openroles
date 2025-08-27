@@ -6,7 +6,8 @@ class SearchController < ApplicationController
         includes: [ :company ],
         operator: "or",
         fields: [ "title^5", "company_name^3", "description" ],
-        misspellings: { below: 1 }
+        misspellings: { below: 1 },
+        match: :word
       )
     else
       @jobs = []

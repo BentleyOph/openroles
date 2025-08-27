@@ -18,5 +18,5 @@ Job.create!([
 puts "Seeding complete."
 
 puts "Reindexing Job data in Elasticsearch..."
-Job.reindex
+Job.includes(:company).reindex
 puts "Reindexing complete."
