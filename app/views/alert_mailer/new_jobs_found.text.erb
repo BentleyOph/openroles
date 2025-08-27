@@ -1,0 +1,15 @@
+<%# app/views/alert_mailer/new_jobs_found.text.erb %>
+Hi there,
+
+We found <%= @jobs.count %> new job(s) matching your alert for: "<%= @alert.query %>"
+
+---
+
+<% @jobs.each do |job| %>
+<%= job.title %> at <%= job.company.name %>
+<%= job.description %>
+---
+<% end %>
+
+To stop receiving these alerts, visit this URL:
+<%= unsubscribe_alert_url(@alert.signed_id(purpose: :unsubscribe)) %>

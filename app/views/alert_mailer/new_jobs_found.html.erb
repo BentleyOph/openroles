@@ -1,0 +1,24 @@
+<%# app/views/alert_mailer/new_jobs_found.html.erb %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hi there,</h1>
+    <p>We found <%= @jobs.count %> new job(s) matching your alert for: <strong>"<%= @alert.query %>"</strong></p>
+
+    <% @jobs.each do |job| %>
+      <div style="border-left: 3px solid #ccc; padding-left: 15px; margin-bottom: 20px;">
+        <h3><%= job.title %> at <%= job.company.name %></h3>
+        <p><%= job.description %></p>
+      </div>
+    <% end %>
+
+    <hr>
+    <p>
+      To stop receiving these alerts, you can
+      <%= link_to "unsubscribe here", unsubscribe_alert_url(@alert.signed_id(purpose: :unsubscribe)) %>.
+    </p>
+  </body>
+</html>
